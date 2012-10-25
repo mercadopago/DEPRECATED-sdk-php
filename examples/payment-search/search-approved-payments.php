@@ -40,11 +40,11 @@
             foreach ($searchResult["response"]["results"] as $payment) {
                 ?>
                 <tr>
-                    <td><?php=$payment["collection"]["id"]?></td>
-                    <td><?php=$payment["collection"]["site_id"]?></td>
-                    <td><?php=$payment["collection"]["date_created"]?></td>
-                    <td><?php=$payment["collection"]["operation_type"]?></td>
-                    <td><?php=$payment["collection"]["external_reference"]?></td>
+                    <td><?php echo $payment["collection"]["id"]; ?></td>
+                    <td><?php echo $payment["collection"]["site_id"]; ?></td>
+                    <td><?php echo $payment["collection"]["date_created"]; ?></td>
+                    <td><?php echo $payment["collection"]["operation_type"]; ?></td>
+                    <td><?php echo $payment["collection"]["external_reference"]; ?></td>
                 </tr>
                 <?php
             }

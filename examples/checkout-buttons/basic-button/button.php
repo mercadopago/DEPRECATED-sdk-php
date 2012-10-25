@@ -27,9 +27,7 @@ $data = array (
     "payer_surname" => "",
     "payer_email" => "",
     "back_url_success" => "https://www.success.com",
-    "back_url_pending" => "",
-    "excluded_payment_methods_id" => "",
-    "excluded_payment_types_id" => "",
+    "back_url_pending" => ""
 );
 
 $md5String = "CLIENT_ID".                    
@@ -38,10 +36,7 @@ $md5String = "CLIENT_ID".
         $data["item_currency_id"].              // item_currency_id
         $data["item_unit_price"].               // item_unit_price
         $data["item_id"].                       // item_id
-        $data["external_reference"].            // external_reference
-        $data["excluded_payment_types_id"].     // excluded_payment_types_id
-        $data["excluded_payment_methods_id"].   // excluded_payment_methods_id
-        $data["credit_card_installments"];      // credit_card_installments
+        $data["external_reference"];            // external_reference
 
 // Get md5 hash
 $md5 = md5($md5String);
@@ -51,14 +46,14 @@ $md5 = md5($md5String);
         <title>Checkout button with MD5 hash</title>
     </head>
     <body>
-		<form action="https://www.mercadopago.com/unified/MD5/checkout/pay" method="post" enctype="application/x-www-form-urlencoded" target="">
+		<form action="https://www.mercadopago.com/checkout/init" method="post" enctype="application/x-www-form-urlencoded" target="">
 			<!--Required authentication. Get the CLIENT_ID: 
 			Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
 			Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes -->	
 			<input type="hidden" name="client_id" value="CLIENT_ID"/>
 		
 			<!-- Hash MD5 -->
-			<input type="hidden" name="key" value="<?php echo $md5 ?>"/>
+			<input type="hidden" name="md5" value="<?php echo $md5 ?>"/>
 		   
 			<!-- Required -->
 			<input type="hidden" name="item_title" value="<?php echo $data["item_title"]?> "/>

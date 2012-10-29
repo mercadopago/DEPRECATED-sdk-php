@@ -24,6 +24,6 @@ $preferenceResult = $mp->create_preference($preference);
     </head>
     <body>
        	<a href="<?php echo $preferenceResult["response"]["init_point"]; ?>" name="MP-payButton" class="orange-ar-m-sq-arall">Pay</a>
-		<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.beta.js"></script>
+		<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
     </body>
 </html>

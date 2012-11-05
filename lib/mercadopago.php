@@ -31,9 +31,11 @@ class MP {
 		
 		$access_data = MPRestClient::post ("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
 		
-		$this->access_data = $access_data["status"] == 200 ? $access_data["response"] : null;
-		
-		return (isset($this->access_data['access_token'])?$this->access_data['access_token']:null);
+		if(isset($this->access_data['access_token'])) {
+			return $this->access_data['access_token'];
+		} else {
+			throw new Exception(json_encode($access_data));
+		}
 	}
 	
 	/**
@@ -42,7 +44,11 @@ class MP {
 	 * @return array(json)
 	 */
 	public function get_payment_info ($id) {
-		$accessToken = $this->get_access_token ();
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		
 		$paymentInfo = MPRestClient::get ("/collections/notifications/".$id."?access_token=".$accessToken);
 		return $paymentInfo;
@@ -56,7 +62,11 @@ class MP {
 	 * @return array(json)
 	 */
 	public function search_payment ($filters, $offset=0, $limit=0) {
-		$accessToken = $this->get_access_token ();
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		
 		$filters["offset"] = $offset;
 		$filters["limit"] = $limit;
@@ -73,7 +83,11 @@ class MP {
 	 * @return array(json)
 	 */
 	public function create_preference ($preference) {
-		$accessToken = $this->get_access_token ();
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		
 		$preferenceResult = MPRestClient::post ("/checkout/preferences?access_token=".$accessToken, $preference);
 		return $preferenceResult;
@@ -86,7 +100,11 @@ class MP {
 	 * @return array(json)
 	 */
 	public function update_preference ($id, $preference) {
-		$accessToken = $this->get_access_token ();
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		
 		$preferenceResult = MPRestClient::put ("/checkout/preferences/{$id}?access_token=".$accessToken, $preference);
 		return $preferenceResult;
@@ -98,7 +116,11 @@ class MP {
 	 * @return array(json)
 	 */
 	public function get_preference ($id) {
-		$accessToken = $this->get_access_token ();
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		
 		$preferenceResult = MPRestClient::get ("/checkout/preferences/{$id}?access_token=".$accessToken);
 		return $preferenceResult;

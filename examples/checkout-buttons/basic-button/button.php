@@ -72,7 +72,7 @@ $md5 = md5($md5String);
 			<input type="hidden" name="back_url_pending" value="<?php echo $data["back_url_pending"]?>"/>
 		   
 			<!-- Checkout Button -->
-			<button type="submit" class="lightblue-rn-m-tr-arall" name="MP-payButton">Pagar</button>
+			<button type="submit" class="lightblue-rn-m-tr-arall" name="MP-Checkout">Pagar</button>
 		</form>
 		
 		<!-- More info about render.js: https://developers.mercadopago.com -->

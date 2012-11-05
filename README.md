@@ -1,17 +1,18 @@
-# Mercadopago SDK module for Payments integration
+# MercadoPago SDK module for Payments integration
 
 * [Usage](#usage)
-* [Using Mercadopago Checkout](#checkout)
-* [Using Mercadopago Payment collection](#payments)
+* [Using MercadoPago Checkout](#checkout)
+* [Using MercadoPago Payment collection](#payments)
 
 <a name="usage"></a>
-### Usage:
+## Usage:
 
 1. Copy lib/mercadopago.php to your project desired folder.
 2. Copy lib/cacert.pem to the same folder (for SSL access to MercadoPago APIs).
 
-* Get your credentials at [Mercadopago Developers Site](https://developers.mercadopago.com/beta/api-de-checkout#get-credentials).
-* Replace your CLIENT_ID and CLIENT_SECRET.
+* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
+	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
+	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
 
 ```php
 require_once "mercadopago.php";
@@ -20,9 +21,9 @@ $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
 <a name="checkout"></a>
-### Using Mercadopago Checkout
+## Using MercadoPago Checkout
 
-Get an existent Checkout preference:
+### Get an existent Checkout preference:
 
 ```php
 $preferenceResult = $mp->get_preference("PREFERENCE_ID");
@@ -30,7 +31,7 @@ $preferenceResult = $mp->get_preference("PREFERENCE_ID");
 print_r ($preferenceResult);
 ```
 
-Create a Checkout preference:
+### Create a Checkout preference:
 
 ```php
 $preference = array (
@@ -49,7 +50,7 @@ $preferenceResult = $mp->create_preference($preference);
 print_r ($preferenceResult);
 ```
 
-Update an existent Checkout preference:
+### Update an existent Checkout preference:
 
 ```php
 $preference = array (
@@ -69,9 +70,9 @@ print_r ($preferenceResult);
 ```
 
 <a name="payments"></a>
-### Using Mercadopago Payment
+## Using MercadoPago Payment
 
-Searching:
+###Searching:
 
 ```php
 $filters = array (
@@ -85,7 +86,11 @@ $searchResult = $mp->search_payment ($filters);
 print_r ($searchResult);
 ```
 
-Receiving IPN notification:
+### Receiving IPN notification:
+
+* Go to **Mercadopago IPN configuration**:
+	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
+	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)<br />
 
 ```php
 require_once "mercadopago.php";
@@ -100,7 +105,7 @@ header ("", true, $paymentInfo["status"]);
 print_r ($paymentInfo);
 ```
 
-Cancel (only for pending payments):
+### Cancel (only for pending payments):
 
 ```php
 $result = $mp->cancel_payment($_GET["ID"]);
@@ -109,7 +114,7 @@ $result = $mp->cancel_payment($_GET["ID"]);
 print_r ($result);
 ```
 
-Refund (only for accredited payments):
+### Refund (only for accredited payments):
 
 ```php
 $result = $mp->refund_payment($_GET["ID"]);

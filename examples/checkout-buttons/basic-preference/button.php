@@ -14,7 +14,6 @@ $preference = array (
 );
 
 $preferenceResult = $mp->create_preference($preference);
-var_dump($preferenceResult);
 ?>
 
 <!doctype html>

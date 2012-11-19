@@ -29,6 +29,8 @@ class MP {
 			'grant_type' => 'client_credentials' 
 		));
 		
+		$access_data = MPRestClient::post ("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
+
 		if(isset($access_data['response']['access_token']) && isset($access_data['response']['access_token'])) {
 			$this->access_data = $access_data['response'];
 		

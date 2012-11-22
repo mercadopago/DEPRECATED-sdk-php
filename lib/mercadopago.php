@@ -57,6 +57,46 @@ class MP {
 	}
 	
 	/**
+	* Refund accredited payment
+	* @param int $id
+	* @return array(json)
+	*/
+	public function refund_payment ($id) {
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+
+		$refund_status = array (
+			"status" => "refunded"
+		);
+
+		$response = MPRestClient::put ("/collections/".$id."?access_token=".$accessToken, $refund_status);
+		return $response;
+	}
+
+	/**
+	* Cancel pending payment
+	* @param int $id
+	* @return array(json)
+	*/
+	public function cancel_payment ($id) {
+		try {
+			$accessToken = $this->get_access_token ();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+
+		$cancel_status = array (
+			"status" => "cancelled"
+		);
+
+		$response = MPRestClient::put ("/collections/".$id."?access_token=".$accessToken, $cancel_status);
+		return $response;
+	}
+
+	/**
 	 * Search payments according to filters, with pagination
 	 * @param array $filters
 	 * @param int $offset

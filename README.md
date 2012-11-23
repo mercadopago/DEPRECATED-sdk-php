@@ -20,6 +20,14 @@ require_once "mercadopago.php";
 $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
+### Get your Access Token:
+
+```php
+$accessToken = $mp->get_access_token();
+
+print_r ($accessToken);
+```
+
 <a name="checkout"></a>
 ## Using MercadoPago Checkout
 

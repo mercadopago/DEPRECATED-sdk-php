@@ -10,6 +10,8 @@
 $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
  
 class MP {
+	const version = "0.1.5";
+
 	private $client_id;
 	private $client_secret;
 	private $access_data;
@@ -22,7 +24,7 @@ class MP {
 	/**
 	 * Get Access Token for API use
 	 */
-	private function get_access_token () {
+	public function get_access_token () {
 		$appClientValues = $this->build_query (array (
 			'client_id' => $this->client_id, 
 			'client_secret' => $this->client_secret, 
@@ -193,6 +195,7 @@ class MPRestClient {
 	private static function getConnect ($uri, $method, $contentType) {
 		$connect = curl_init(self::API_BASE_URL.$uri);
 		
+		curl_setopt($connect, CURLOPT_USERAGENT, "MercadoPago PHP SDK v".MP::version);
 		curl_setopt($connect, CURLOPT_CAINFO, $GLOBALS["LIB_LOCATION"]."/cacert.pem");
 		curl_setopt($connect, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($connect, CURLOPT_CUSTOMREQUEST, $method);

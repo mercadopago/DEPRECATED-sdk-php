@@ -57,6 +57,7 @@ $preferenceResult = $mp->create_preference($preference);
 
 print_r ($preferenceResult);
 ```
+<a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
 
 ### Update an existent Checkout preference:
 
@@ -93,7 +94,7 @@ $searchResult = $mp->search_payment ($filters);
 
 print_r ($searchResult);
 ```
-
+<a href="http://developers.mercadopago.com/documentacion/busqueda-de-pagos-recibidos">More search examples</a>
 ### Receiving IPN notification:
 
 * Go to **Mercadopago IPN configuration**:
@@ -130,3 +131,4 @@ $result = $mp->refund_payment($_GET["ID"]);
 // Show result
 print_r ($result);
 ```
+<a href="http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion">About Cancel & Refund </a>

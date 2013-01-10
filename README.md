@@ -85,10 +85,10 @@ print_r ($preferenceResult);
 
 ```php
 $filters = array (
-        "id": null,
-        "site_id": null,
-        "external_reference": null
-    };
+        "id"=>null,
+        "site_id"=>null,
+        "external_reference"=>null
+    );
 
 $searchResult = $mp->search_payment ($filters);
 

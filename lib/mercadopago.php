@@ -216,7 +216,7 @@ class MPRestClient {
                 $data = json_encode($data);
             }
 
-            if (function_exists('json_last_error')) {
+            if(function_exists('json_last_error')) {
                 $json_error = json_last_error();
                 if ($json_error != JSON_ERROR_NONE) {
                     throw new Exception("JSON Error [{$json_error}] - Data: {$data}");

@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.1.5";
+    const version = "0.1.6";
 
     private $client_id;
     private $client_secret;
@@ -34,13 +34,9 @@ class MP {
 
         $access_data = MPRestClient::post("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
 
-        if (isset($access_data['response']['access_token']) && isset($access_data['response']['access_token'])) {
-            $this->access_data = $access_data['response'];
+        $this->access_data = $access_data['response'];
 
-            return $this->access_data['access_token'];
-        } else {
-            throw new Exception(json_encode($access_data));
-        }
+        return $this->access_data['access_token'];
     }
 
     /**
@@ -49,11 +45,7 @@ class MP {
      * @return array(json)
      */
     public function get_payment_info($id) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $paymentInfo = MPRestClient::get("/collections/notifications/" . $id . "?access_token=" . $accessToken);
         return $paymentInfo;
@@ -65,11 +57,7 @@ class MP {
      * @return array(json)
      */
     public function refund_payment($id) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $refund_status = array(
             "status" => "refunded"
@@ -85,11 +73,7 @@ class MP {
      * @return array(json)
      */
     public function cancel_payment($id) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $cancel_status = array(
             "status" => "cancelled"
@@ -107,11 +91,7 @@ class MP {
      * @return array(json)
      */
     public function search_payment($filters, $offset = 0, $limit = 0) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $filters["offset"] = $offset;
         $filters["limit"] = $limit;
@@ -128,11 +108,7 @@ class MP {
      * @return array(json)
      */
     public function create_preference($preference) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $preferenceResult = MPRestClient::post("/checkout/preferences?access_token=" . $accessToken, $preference);
         return $preferenceResult;
@@ -145,11 +121,7 @@ class MP {
      * @return array(json)
      */
     public function update_preference($id, $preference) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $preferenceResult = MPRestClient::put("/checkout/preferences/{$id}?access_token=" . $accessToken, $preference);
         return $preferenceResult;
@@ -161,11 +133,7 @@ class MP {
      * @return array(json)
      */
     public function get_preference($id) {
-        try {
-            $accessToken = $this->get_access_token();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        $accessToken = $this->get_access_token();
 
         $preferenceResult = MPRestClient::get("/checkout/preferences/{$id}?access_token=" . $accessToken);
         return $preferenceResult;
@@ -201,6 +169,7 @@ class MPRestClient {
 
         curl_setopt($connect, CURLOPT_USERAGENT, "MercadoPago PHP SDK v" . MP::version);
         curl_setopt($connect, CURLOPT_CAINFO, $GLOBALS["LIB_LOCATION"] . "/cacert.pem");
+        curl_setopt($connect, CURLOPT_SSLVERSION, 3);
         curl_setopt($connect, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($connect, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($connect, CURLOPT_HTTPHEADER, array("Accept: application/json", "Content-Type: " . $contentType));
@@ -238,6 +207,10 @@ class MPRestClient {
             "status" => $apiHttpCode,
             "response" => json_decode($apiResult, true)
         );
+
+        if ($response['status'] >= 400) {
+            throw new Exception ($response['response']['message'], $response['status']);
+        }
 
         curl_close($connect);
 

@@ -1,5 +1,5 @@
 <?php
-require_once "../../../project/src/mercadopago.php";
+require_once "../../../lib/mercadopago.php";
 
 $mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 

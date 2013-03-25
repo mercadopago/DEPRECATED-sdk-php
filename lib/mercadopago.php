@@ -11,15 +11,24 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.1.6";
+    const version = "0.1.8";
 
     private $client_id;
     private $client_secret;
     private $access_data;
+    private $sandbox = FALSE;
 
     function __construct($client_id, $client_secret) {
         $this->client_id = $client_id;
         $this->client_secret = $client_secret;
+    }
+
+    public function sandbox_mode(enable = NULL) {
+        if (!is_null(enable)) {
+            $this->sandbox = enable === TRUE;
+        }
+
+        return $this->sandbox;
     }
 
     /**
@@ -47,7 +56,9 @@ class MP {
     public function get_payment_info($id) {
         $accessToken = $this->get_access_token();
 
-        $paymentInfo = MPRestClient::get("/collections/notifications/" . $id . "?access_token=" . $accessToken);
+        $uriPrefix = $this->sandbox ? "/sandbox" : "";
+            
+        $paymentInfo = MPRestClient::get($uriPrefix."/collections/notifications/" . $id . "?access_token=" . $accessToken);
         return $paymentInfo;
     }
 
@@ -98,7 +109,9 @@ class MP {
 
         $filters = $this->build_query($filters);
 
-        $collectionResult = MPRestClient::get("/collections/search?" . $filters . "&access_token=" . $accessToken);
+        $uriPrefix = $this->sandbox ? "/sandbox" : "";
+            
+        $collectionResult = MPRestClient::get($uriPrefix."/collections/search?" . $filters . "&access_token=" . $accessToken);
         return $collectionResult;
     }
 

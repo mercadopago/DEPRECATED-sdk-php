@@ -23,9 +23,9 @@ class MP {
         $this->client_secret = $client_secret;
     }
 
-    public function sandbox_mode(enable = NULL) {
-        if (!is_null(enable)) {
-            $this->sandbox = enable === TRUE;
+    public function sandbox_mode($enable = NULL) {
+        if (!is_null($enable)) {
+            $this->sandbox = $enable === TRUE;
         }
 
         return $this->sandbox;

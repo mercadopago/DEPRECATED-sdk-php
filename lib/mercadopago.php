@@ -211,7 +211,9 @@ class MPRestClient {
 
     private static function exec($method, $uri, $data, $contentType) {
         $connect = self::getConnect($uri, $method, $contentType);
-        self::setData($connect, $data, $contentType);
+        if ($data) {
+            self::setData($connect, $data, $contentType);
+        }
 
         $apiResult = curl_exec($connect);
         $apiHttpCode = curl_getinfo($connect, CURLINFO_HTTP_CODE);

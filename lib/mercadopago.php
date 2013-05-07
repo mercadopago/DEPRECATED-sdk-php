@@ -73,7 +73,7 @@ class MP {
     public function get_authorized_payment($id) {
         $access_token = $this->get_access_token();
 
-        $authorized_payment_info = MPRestClient::get($uri_prefix."/authorized_payments/" . $id . "?access_token=" . $access_token);
+        $authorized_payment_info = MPRestClient::get("/authorized_payments/" . $id . "?access_token=" . $access_token);
         return $authorized_payment_info;
     }
 

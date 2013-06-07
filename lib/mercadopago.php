@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.1.8";
+    const version = "0.1.9";
 
     private $client_id;
     private $client_secret;
@@ -41,7 +41,7 @@ class MP {
             'grant_type' => 'client_credentials'
                 ));
 
-        $access_data = MPRestClient::post("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
+        $access_data = MPRestClient::post("/oauth/token", $appClientValues, "application/x-www-form-urlencoded");
 
         $this->access_data = $access_data['response'];
 
@@ -174,8 +174,6 @@ class MP {
 class MPRestClient {
 
     const API_BASE_URL = "https://api.mercadolibre.com";
-    const MIME_JSON = "application/json";
-    const MIME_FORM = "application/x-www-form-urlencoded";
 
     private static function getConnect($uri, $method, $contentType) {
         $connect = curl_init(self::API_BASE_URL . $uri);
@@ -191,7 +189,7 @@ class MPRestClient {
     }
 
     private static function setData(&$connect, $data, $contentType) {
-        if ($contentType == self::MIME_JSON) {
+        if ($contentType == "application/json") {
             if (gettype($data) == "string") {
                 json_decode($data, true);
             } else {
@@ -232,15 +230,15 @@ class MPRestClient {
         return $response;
     }
 
-    public static function get($uri, $contentType = self::MIME_JSON) {
+    public static function get($uri, $contentType = "application/json") {
         return self::exec("GET", $uri, null, $contentType);
     }
 
-    public static function post($uri, $data, $contentType = self::MIME_JSON) {
+    public static function post($uri, $data, $contentType = "application/json") {
         return self::exec("POST", $uri, $data, $contentType);
     }
 
-    public static function put($uri, $data, $contentType = self::MIME_JSON) {
+    public static function put($uri, $data, $contentType = "application/json") {
         return self::exec("PUT", $uri, $data, $contentType);
     }
 

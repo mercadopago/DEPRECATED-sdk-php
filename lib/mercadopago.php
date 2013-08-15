@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.1.9";
+    const version = "0.1.10";
 
     private $client_id;
     private $client_secret;
@@ -156,7 +156,7 @@ class MP {
 
     private function build_query($params) {
         if (function_exists("http_build_query")) {
-            return http_build_query($params);
+            return http_build_query($params, "", "&");
         } else {
             foreach ($params as $name => $value) {
                 $elements[] = "{$name}=" . urlencode($value);

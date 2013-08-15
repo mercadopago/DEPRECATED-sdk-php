@@ -41,7 +41,7 @@ class MP {
             'grant_type' => 'client_credentials'
                 ));
 
-        $access_data = MPRestClient::post("/oauth/token", $app_client_values, MPRestClient::MIME_FORM);
+        $access_data = MPRestClient::post("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
 
         $this->access_data = $access_data['response'];
 
@@ -229,8 +229,6 @@ class MP {
 class MPRestClient {
 
     const API_BASE_URL = "https://api.mercadolibre.com";
-    const MIME_JSON = "application/json";
-    const MIME_FORM = "application/x-www-form-urlencoded";
 
     private static function get_connect($uri, $method, $content_type) {
         $connect = curl_init(self::API_BASE_URL . $uri);
@@ -245,8 +243,8 @@ class MPRestClient {
         return $connect;
     }
 
-    private static function set_data(&$connect, $data, $content_type) {
-        if ($content_type == self::MIME_JSON) {
+    private static function setData(&$connect, $data, $contentType) {
+        if ($contentType == "application/json") {
             if (gettype($data) == "string") {
                 json_decode($data, true);
             } else {
@@ -287,16 +285,16 @@ class MPRestClient {
         return $response;
     }
 
-    public static function get($uri, $content_type = self::MIME_JSON) {
-        return self::exec("GET", $uri, null, $content_type);
+    public static function get($uri, $contentType = "application/json") {
+        return self::exec("GET", $uri, null, $contentType);
     }
 
-    public static function post($uri, $data, $content_type = self::MIME_JSON) {
-        return self::exec("POST", $uri, $data, $content_type);
+    public static function post($uri, $data, $contentType = "application/json") {
+        return self::exec("POST", $uri, $data, $contentType);
     }
 
-    public static function put($uri, $data, $content_type = self::MIME_JSON) {
-        return self::exec("PUT", $uri, $data, $content_type);
+    public static function put($uri, $data, $contentType = "application/json") {
+        return self::exec("PUT", $uri, $data, $contentType);
     }
 
 }

@@ -41,7 +41,7 @@ class MP {
             'grant_type' => 'client_credentials'
                 ));
 
-        $access_data = MPRestClient::post("/oauth/token", $appClientValues, MPRestClient::MIME_FORM);
+        $access_data = MPRestClient::post("/oauth/token", $app_client_values, MPRestClient::MIME_FORM);
 
         $this->access_data = $access_data['response'];
 
@@ -211,7 +211,7 @@ class MP {
 
     private function build_query($params) {
         if (function_exists("http_build_query")) {
-            return http_build_query($params);
+            return http_build_query($params, "", "&");
         } else {
             foreach ($params as $name => $value) {
                 $elements[] = "{$name}=" . urlencode($value);

@@ -243,8 +243,8 @@ class MPRestClient {
         return $connect;
     }
 
-    private static function setData(&$connect, $data, $contentType) {
-        if ($contentType == "application/json") {
+    private static function set_data(&$connect, $data, $content_type) {
+        if ($content_type == "application/json") {
             if (gettype($data) == "string") {
                 json_decode($data, true);
             } else {
@@ -285,16 +285,16 @@ class MPRestClient {
         return $response;
     }
 
-    public static function get($uri, $contentType = "application/json") {
-        return self::exec("GET", $uri, null, $contentType);
+    public static function get($uri, $content_type = "application/json") {
+        return self::exec("GET", $uri, null, $content_type);
     }
 
-    public static function post($uri, $data, $contentType = "application/json") {
-        return self::exec("POST", $uri, $data, $contentType);
+    public static function post($uri, $data, $content_type = "application/json") {
+        return self::exec("POST", $uri, $data, $content_type);
     }
 
-    public static function put($uri, $data, $contentType = "application/json") {
-        return self::exec("PUT", $uri, $data, $contentType);
+    public static function put($uri, $data, $content_type = "application/json") {
+        return self::exec("PUT", $uri, $data, $content_type);
     }
 
 }

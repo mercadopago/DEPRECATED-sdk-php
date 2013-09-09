@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.2.0";
+    const version = "0.2.1";
 
     private $client_id;
     private $client_secret;
@@ -41,7 +41,7 @@ class MP {
             'grant_type' => 'client_credentials'
                 ));
 
-        $access_data = MPRestClient::post("/oauth/token", $app_client_values, MPRestClient::MIME_FORM);
+        $access_data = MPRestClient::post("/oauth/token", $app_client_values, "application/x-www-form-urlencoded");
 
         $this->access_data = $access_data['response'];
 

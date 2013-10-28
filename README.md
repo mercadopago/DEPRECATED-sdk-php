@@ -11,10 +11,11 @@
 2. Copy lib/cacert.pem to the same folder (for SSL access to MercadoPago APIs).
 
 * Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
-	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
-	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
-	* Mexico: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
-	* Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
+    * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
+    * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
+    * Mexico: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
+    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
+    * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
 
 ```php
 require_once "mercadopago.php";
@@ -45,14 +46,14 @@ print_r ($preferenceResult);
 
 ```php
 $preference = array (
-	"items" => array (
-		array (
-			"title" => "Test",
-			"quantity" => 1,
-			"currency_id" => "USD",
-			"unit_price" => 10.4
-		)
-	)
+    "items" => array (
+        array (
+            "title" => "Test",
+            "quantity" => 1,
+            "currency_id" => "USD",
+            "unit_price" => 10.4
+        )
+    )
 );
 
 $preferenceResult = $mp->create_preference($preference);
@@ -65,14 +66,14 @@ print_r ($preferenceResult);
 
 ```php
 $preference = array (
-	"items" => array (
-		array (
-			"title" => "Test Modified",
-			"quantity" => 1,
-			"currency_id" => "USD",
-			"unit_price" => 20.4
-		)
-	)
+    "items" => array (
+        array (
+            "title" => "Test Modified",
+            "quantity" => 1,
+            "currency_id" => "USD",
+            "unit_price" => 20.4
+        )
+    )
 );
 
 $preferenceResult = $mp->update_preference("PREFERENCE_ID", $preference);
@@ -100,10 +101,11 @@ print_r ($searchResult);
 ### Receiving IPN notification:
 
 * Go to **Mercadopago IPN configuration**:
-	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
-	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)<br />
-	* Mexico: [https://www.mercadopago.com/mlm/herramientas/notificaciones](https://www.mercadopago.com/mlm/herramientas/notificaciones)
-	* Venezuela: [https://www.mercadopago.com/mlv/herramientas/notificaciones](https://www.mercadopago.com/mlv/herramientas/notificaciones)
+    * Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
+    * Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
+    * Mexico: [https://www.mercadopago.com/mlm/herramientas/notificaciones](https://www.mercadopago.com/mlm/herramientas/notificaciones)
+    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/notificaciones](https://www.mercadopago.com/mlv/herramientas/notificaciones)
+    * Colombia: [https://www.mercadopago.com/mco/herramientas/notificaciones](https://www.mercadopago.com/mco/herramientas/notificaciones)
 
 ```php
 require_once "mercadopago.php";

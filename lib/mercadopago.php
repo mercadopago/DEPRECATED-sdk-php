@@ -207,6 +207,19 @@ class MP {
         return $preapproval_payment_result;
     }
 
+	/**
+     * Update a preapproval payment
+     * @param string $preapproval_payment, $id
+     * @return array(json)
+     */	
+	
+	public function update_preapproval_payment($id, $preapproval_payment) {
+        $access_token = $this->get_access_token();
+
+        $preapproval_payment_result = MPRestClient::put("/preapproval/" . $id . "?access_token=" . $access_token, $preapproval_payment);
+        return $preapproval_payment_result;
+    }
+
     /* **************************************************************************************** */
 
     private function build_query($params) {

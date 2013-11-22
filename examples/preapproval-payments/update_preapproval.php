@@ -1,11 +1,11 @@
 <?php
-require_once "lib/mercadopago.php";
+require_once "../../lib/mercadopago.php";
 
 $mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 
 $id = "PREAPPROVAL_ID";
 
-$preapprovalPayment = array(
+$preapprovalPayment_data = array(
     "payer_email" => "my_customer@my_site.com",
     "back_url" => "http://www.example.com.ar",
     "reason" => "Suscripción mensual",
@@ -18,7 +18,7 @@ $preapprovalPayment = array(
     "end_date" => "2013-12-10T14:58:11.778-03:00"
 );
 
-$preapprovalPaymentResult = $mp->update_preapproval_payment($id, $preapprovalPayment);
+$preapprovalPayment = $mp->update_preapproval_payment($id, $preapprovalPayment_data);
 ?>
 
 <!doctype html>
@@ -27,7 +27,7 @@ $preapprovalPaymentResult = $mp->update_preapproval_payment($id, $preapprovalPay
         <title>MercadoPago SDK - Create Preapproval Payment and Show Subscription Example</title>
     </head>
     <body>
-       	<a href="<?php echo $preapprovalPaymentResult["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
+       	<a href="<?php echo $preapprovalPayment["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
         <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
     </body>
 </html>

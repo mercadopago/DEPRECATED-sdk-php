@@ -18,7 +18,7 @@
     * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
 
 ```php
-require_once "mercadopago.php";
+require_once ('mercadopago.php');
 
 $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
@@ -37,15 +37,15 @@ print_r ($accessToken);
 ### Get an existent Checkout preference:
 
 ```php
-$preferenceResult = $mp->get_preference("PREFERENCE_ID");
+$preference = $mp->get_preference("PREFERENCE_ID");
 
-print_r ($preferenceResult);
+print_r ($preference);
 ```
 
 ### Create a Checkout preference:
 
 ```php
-$preference = array (
+$preference_data = array (
     "items" => array (
         array (
             "title" => "Test",
@@ -56,16 +56,16 @@ $preference = array (
     )
 );
 
-$preferenceResult = $mp->create_preference($preference);
+$preference = $mp->create_preference($preference_data);
 
-print_r ($preferenceResult);
+print_r ($preference);
 ```
 <a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
 
 ### Update an existent Checkout preference:
 
 ```php
-$preference = array (
+$preference_data = array (
     "items" => array (
         array (
             "title" => "Test Modified",
@@ -76,9 +76,9 @@ $preference = array (
     )
 );
 
-$preferenceResult = $mp->update_preference("PREFERENCE_ID", $preference);
+$preference = $mp->update_preference("PREFERENCE_ID", $preference_data);
 
-print_r ($preferenceResult);
+print_r ($preference);
 ```
 
 <a name="payments"></a>
@@ -108,7 +108,7 @@ print_r ($searchResult);
     * Colombia: [https://www.mercadopago.com/mco/herramientas/notificaciones](https://www.mercadopago.com/mco/herramientas/notificaciones)
 
 ```php
-require_once "mercadopago.php";
+require_once ('mercadopago.php');
 
 header("Content-type: text/plain");
 

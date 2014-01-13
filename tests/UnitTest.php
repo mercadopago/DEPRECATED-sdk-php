@@ -43,7 +43,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preference = $this->mp->create_preference($preference);
+        $preference = $this->mp->create_preference($preference_data);
 
         $this->assertTrue($preference["status"] == 201);
 
@@ -68,7 +68,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preference = $this->mp->create_preference($preference);
+        $preference = $this->mp->create_preference($preference_data);
 
         $preference_data = array(
             "items" => array(
@@ -81,7 +81,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preferenceUpdatedResult = $this->mp->update_preference($preference["response"]["id"], $preference);
+        $preferenceUpdatedResult = $this->mp->update_preference($preference["response"]["id"], $preference_data);
 
         $this->assertTrue($preferenceUpdatedResult["status"] == 200);
 

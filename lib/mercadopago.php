@@ -220,7 +220,18 @@ class MP {
         return $preapproval_payment_result;
     }
 
-    /* **************************************************************************************** */
+	/**
+	* Create sandbox users.
+	* @param int $site_id
+	* @return array (json)
+	* @link https://developers.mercadopago.com/documentacion/crear-usuarios-de-prueba
+	*/
+	public function create_users($site_id) {
+		$access_token = $this->get_access_token();
+		return MPRestClient::post("/users/test_user?access_token=" . $access_token, $site_id);
+	}
+
+	/* **************************************************************************************** */
 
     private function build_query($params) {
         if (function_exists("http_build_query")) {

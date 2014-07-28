@@ -13,7 +13,7 @@ $preference_data = array(
 			"description" => "Description",
 			"category_id" => "Category",
 			"quantity" => 1,
-			"unit_price" => 10
+			"unit_price" => 10.2
 		)
 	),
 	"payer" => array(

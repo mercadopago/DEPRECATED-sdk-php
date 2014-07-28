@@ -1,14 +1,15 @@
 <?php
 require_once "../../../lib/mercadopago.php";
 
-$mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+$mp = new MP("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 
 $preference_data = array(
     "items" => array(
         array(
-            "title" => "sdk-php",
+            "title" => "Title of what you are paying for",
+            "currency_id" => "USD",
+            "category_id" => "Category",
             "quantity" => 1,
-            "currency_id" => "ARS",
             "unit_price" => 10.2
         )
     )

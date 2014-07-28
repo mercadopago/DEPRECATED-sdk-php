@@ -23,16 +23,16 @@ class UnitTest extends PHPUnit_Framework_TestCase {
 
     public function testGetPreference() {
 
-        $preferenceResult = $this->mp->get_preference("ID");
+        $preference = $this->mp->get_preference("ID");
 
-        $this->assertTrue($preferenceResult["status"] == 200);
+        $this->assertTrue($preference["status"] == 200);
     }
 
     /* Create a new preference and verify that data result are ok */
 
     public function testCreatePreference() {
 
-        $preference = array(
+        $preference_data = array(
             "items" => array(
                 array(
                     "title" => "test1",
@@ -43,21 +43,21 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preferenceResult = $this->mp->create_preference($preference);
+        $preference = $this->mp->create_preference($preference_data);
 
-        $this->assertTrue($preferenceResult["status"] == 201);
+        $this->assertTrue($preference["status"] == 201);
 
-        $this->assertTrue($preferenceResult["response"]["items"][0]["title"] == "test1"
-                && (int) $preferenceResult["response"]["items"][0]["quantity"] == 1
-                && (double) $preferenceResult["response"]["items"][0]["unit_price"] == 10.2
-                && $preferenceResult["response"]["items"][0]["currency_id"] == "ARS");
+        $this->assertTrue($preference["response"]["items"][0]["title"] == "test1"
+                && (int) $preference["response"]["items"][0]["quantity"] == 1
+                && (double) $preference["response"]["items"][0]["unit_price"] == 10.2
+                && $preference["response"]["items"][0]["currency_id"] == "ARS");
     }
 
     /* We create a new preference, we modify this one and then we verify that data are ok. */
 
     public function testUpdatePreference() {
 
-        $preference = array(
+        $preference_data = array(
             "items" => array(
                 array(
                     "title" => "test2",
@@ -68,9 +68,9 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preferenceResult = $this->mp->create_preference($preference);
+        $preference = $this->mp->create_preference($preference_data);
 
-        $preference = array(
+        $preference_data = array(
             "items" => array(
                 array(
                     "title" => "test2Modified",
@@ -81,11 +81,11 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             )
         );
 
-        $preferenceUpdatedResult = $this->mp->update_preference($preferenceResult["response"]["id"], $preference);
+        $preferenceUpdatedResult = $this->mp->update_preference($preference["response"]["id"], $preference_data);
 
         $this->assertTrue($preferenceUpdatedResult["status"] == 200);
 
-        $preferenceUpdatedResult = $this->mp->get_preference($preferenceResult["response"]["id"]);
+        $preferenceUpdatedResult = $this->mp->get_preference($preference["response"]["id"]);
 
         $this->assertTrue((double) $preferenceUpdatedResult["response"]["items"][0]["unit_price"] == 100
                 && (double) $preferenceUpdatedResult["response"]["items"][0]["quantity"] == 2

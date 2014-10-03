@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.2.1";
+    const version = "0.2.2";
 
     private $client_id;
     private $client_secret;
@@ -42,6 +42,10 @@ class MP {
                 ));
 
         $access_data = MPRestClient::post("/oauth/token", $app_client_values, "application/x-www-form-urlencoded");
+
+        if ($access_data["status"] != 200) {
+            throw new Exception ($access_data['response']['message'], $response['status']);
+        }
 
         $this->access_data = $access_data['response'];
 

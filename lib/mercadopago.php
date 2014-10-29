@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.2.3";
+    const version = "0.2.4";
 
     private $client_id;
     private $client_secret;
@@ -211,13 +211,13 @@ class MP {
         return $preapproval_payment_result;
     }
 
-	/**
+    /**
      * Update a preapproval payment
      * @param string $preapproval_payment, $id
      * @return array(json)
-     */	
-	
-	public function update_preapproval_payment($id, $preapproval_payment) {
+     */ 
+    
+    public function update_preapproval_payment($id, $preapproval_payment) {
         $access_token = $this->get_access_token();
 
         $preapproval_payment_result = MPRestClient::put("/preapproval/" . $id . "?access_token=" . $access_token, $preapproval_payment);
@@ -248,6 +248,10 @@ class MPRestClient {
     const API_BASE_URL = "https://api.mercadolibre.com";
 
     private static function get_connect($uri, $method, $content_type) {
+        if (!extension_loaded ("curl")) {
+            throw new Exception("cURL extension not found. You need to enable cURL in your php.ini or another configuration you have.");
+        }
+
         $connect = curl_init(self::API_BASE_URL . $uri);
 
         curl_setopt($connect, CURLOPT_USERAGENT, "MercadoPago PHP SDK v" . MP::version);

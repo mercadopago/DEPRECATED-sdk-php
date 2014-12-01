@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.2.4";
+    const version = "0.2.5";
 
     private $client_id;
     private $client_secret;
@@ -291,6 +291,10 @@ class MPRestClient {
 
         $api_result = curl_exec($connect);
         $api_http_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
+
+        if ($api_result === FALSE) {
+            throw new Exception (curl_error ($connect));
+        }
 
         $response = array(
             "status" => $api_http_code,

@@ -138,3 +138,26 @@ $result = $mp->refund_payment($_GET["ID"]);
 print_r ($result);
 ```
 <a href="http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion">About Cancel & Refund </a>
+
+### Generic resources methods
+
+You can access any other resource from the MercadoPago API using the generic methods:
+
+```php
+// Get a resource, with optional URL params. Also you can disable authentication for public APIs
+$mp->get ("/resource/uri", [params], [authenticate=true]);
+
+// Create a resource with "data" and optional URL params.
+$mp->post ("/resource/uri", data, [params]);
+
+// Update a resource with "data" and optional URL params.
+$mp->put ("/resource/uri", data, [params]);
+```
+
+ For example, if you want to get the Sites list (no params and no authentication):
+
+```php
+$sites = $mp->get ("/sites", null, false);
+
+print_r ($sites);
+```

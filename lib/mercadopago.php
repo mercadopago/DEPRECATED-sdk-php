@@ -7,20 +7,32 @@
  * @author hcasatti
  *
  */
-$GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.3.0";
+    const version = "0.3.1";
 
     private $client_id;
     private $client_secret;
+    private $ll_access_token;
     private $access_data;
     private $sandbox = FALSE;
 
-    function __construct($client_id, $client_secret) {
-        $this->client_id = $client_id;
-        $this->client_secret = $client_secret;
+    function __construct() {
+        $i = func_num_args(); 
+
+        if ($i > 2 || $i < 1) {
+            throw new Exception("Invalid arguments. Use CLIENT_ID and CLIENT SECRET, or ACCESS_TOKEN");
+        }
+
+        if ($i == 1) {
+            $this->ll_access_token = func_get_arg(0);
+        }
+
+        if ($i == 2) {
+            $this->client_id = func_get_arg(0);
+            $this->client_secret = func_get_arg(1);
+        }
     }
 
     public function sandbox_mode($enable = NULL) {
@@ -35,11 +47,15 @@ class MP {
      * Get Access Token for API use
      */
     public function get_access_token() {
+        if (isset ($this->ll_access_token) && !is_null($this->ll_access_token)) {
+            return $this->ll_access_token;
+        }
+
         $app_client_values = $this->build_query(array(
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
             'grant_type' => 'client_credentials'
-                ));
+        ));
 
         $access_data = MPRestClient::post("/oauth/token", $app_client_values, "application/x-www-form-urlencoded");
 
@@ -313,7 +329,7 @@ class MP {
  */
 class MPRestClient {
 
-    const API_BASE_URL = "https://api.mercadolibre.com";
+    const API_BASE_URL = "https://api.mercadopago.com";
 
     private static function get_connect($uri, $method, $content_type) {
         if (!extension_loaded ("curl")) {
@@ -389,5 +405,3 @@ class MPRestClient {
     }
 
 }
-
-?>

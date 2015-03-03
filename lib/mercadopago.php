@@ -10,7 +10,7 @@
 
 class MP {
 
-    const version = "0.3.1";
+    const version = "0.3.2";
 
     private $client_id;
     private $client_secret;
@@ -308,6 +308,27 @@ class MP {
         return $result;
     }
 
+    /**
+    * Generic resource delete
+    * @param uri
+    * @param data
+    * @param params
+    */
+    public function delete($uri, $params = null) {
+        $params = is_array ($params) ? $params : array();
+
+        $access_token = $this->get_access_token();
+        $params["access_token"] = $access_token;
+
+        if (count($params) > 0) {
+            $uri .= (strpos($uri, "?") === false) ? "?" : "&";
+            $uri .= $this->build_query($params);
+        }
+
+        $result = MPRestClient::delete($uri);
+        return $result;
+    }
+
     /* **************************************************************************************** */
 
     private function build_query($params) {
@@ -404,4 +425,7 @@ class MPRestClient {
         return self::exec("PUT", $uri, $data, $content_type);
     }
 
+    public static function delete($uri, $content_type = "application/json") {
+        return self::exec("DELETE", $uri, $null, $content_type);
+    }
 }

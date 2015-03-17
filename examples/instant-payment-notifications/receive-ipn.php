@@ -36,7 +36,9 @@ if ($merchant_order_info["status"] == 200) {
 		    }
 		    if($transaction_amount_payments >= $transaction_amount_order){
 		    	echo "release your items";
+		    }else{
+		    	echo "dont release your items";
 		    }
 	}
-echo "dont release your items";
+
 ?>

@@ -86,6 +86,23 @@ class MP {
     }
 
     /**
+     * Get information for specific merchant order
+     * @param int $id
+     * @return array(json)
+     */
+    public function get_merchant_order($id) {
+        $access_token = $this->get_access_token();
+
+        $uri_prefix = $this->sandbox ? "/sandbox" : "";
+            
+        $payment_info = MPRestClient::get($uri_prefix."/merchant_orders/" . $id . "?access_token=" . $access_token);
+        return $payment_info;
+    }
+    public function get_merchant_order_info($id) {
+        return $this->get_merchant_order($id);
+    }
+
+    /**
      * Get information for specific authorized payment
      * @param id
      * @return array(json)

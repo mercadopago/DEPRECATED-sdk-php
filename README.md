@@ -25,6 +25,7 @@ As a dependency in your project's composer.json
         "mercadopago/sdk": "0.3.2"
     }
 }
+```
 
 ### By downloading
 

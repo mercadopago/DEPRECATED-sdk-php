@@ -30,7 +30,7 @@ As a dependency in your project's composer.json
 ### By downloading
 
 1. Clone/download this repository
-2. Copy lib/mercadopago.php to your project's desired folder.
+2. Copy `lib/mercadopago.php` to your project's desired folder.
 
 <a name="basic-checkout"></a>
 ## Basic checkout

@@ -184,7 +184,6 @@ $mp->get ("/v1/customers/CUSTOMER_ID");
     * Venezuela: [https://labs.mercadopago.com.ve/developers](https://labs.mercadopago.com.ve/developers)
     * Colombia: [https://labs.mercadopago.com.co/developers](https://labs.mercadopago.com.co/developers)
 
-
 <a name="generic-methods"></a>
 ## Generic methods
 

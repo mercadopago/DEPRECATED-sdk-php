@@ -30,7 +30,7 @@ As a dependency in your project's composer.json
 ### By downloading
 
 1. Clone/download this repository
-2. Copy lib/mercadopago.php to your project's desired folder.
+2. Copy `lib/mercadopago.php` to your project's desired folder.
 
 <a name="basic-checkout"></a>
 ## Basic checkout
@@ -52,7 +52,7 @@ $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 
 ### Preferences
 
-#### Get an existent Checkout preference:
+#### Get an existent Checkout preference
 
 ```php
 $preference = $mp->get_preference("PREFERENCE_ID");
@@ -60,7 +60,7 @@ $preference = $mp->get_preference("PREFERENCE_ID");
 print_r ($preference);
 ```
 
-#### Create a Checkout preference:
+#### Create a Checkout preference
 
 ```php
 $preference_data = array (
@@ -79,7 +79,7 @@ $preference = $mp->create_preference($preference_data);
 print_r ($preference);
 ```
 
-#### Update an existent Checkout preference:
+#### Update an existent Checkout preference
 
 ```php
 $preference_data = array (
@@ -125,7 +125,7 @@ $paymentInfo = $mp->get_payment ("PAYMENT_ID");
 print_r ($paymentInfo);
 ```
 
-#### Cancel (only for pending payments):
+#### Cancel (only for pending payments)
 
 ```php
 $result = $mp->cancel_payment("PAYMENT_ID");
@@ -133,7 +133,7 @@ $result = $mp->cancel_payment("PAYMENT_ID");
 print_r ($result);
 ```
 
-#### Refund (only for accredited payments):
+#### Refund (only for accredited payments)
 
 ```php
 $result = $mp->refund_payment("PAYMENT_ID");

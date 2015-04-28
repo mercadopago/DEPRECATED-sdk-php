@@ -1,15 +1,41 @@
 # MercadoPago SDK module for Payments integration
 
-* [Usage](#usage)
-* [Using MercadoPago Checkout](#checkout)
-* [Using MercadoPago Payment collection](#payments)
+* [Install](#install)
+* [Basic checkout](#basic-checkout)
+* [Customized checkout](#custom-checkout)
+* [Generic methods](#generic-methods)
 
-<a name="usage"></a>
-## Usage:
+<a name="install"></a>
+## Install
 
-1. Copy lib/mercadopago.php to your project desired folder.
 
-### ...with your credentials:
+### With Composer
+
+From command line
+
+```
+composer require mercadopago/sdk:0.3.2
+```
+
+As a dependency in your project's composer.json
+
+```json
+{
+    "require": {
+        "mercadopago/sdk": "0.3.2"
+    }
+}
+```
+
+### By downloading
+
+1. Clone/download this repository
+2. Copy lib/mercadopago.php to your project's desired folder.
+
+<a name="basic-checkout"></a>
+## Basic checkout
+
+### Configure your credentials
 
 * Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
     * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
@@ -24,26 +50,9 @@ require_once ('mercadopago.php');
 $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
 ```
 
-### ...with your long live access token:
+### Preferences
 
-```php
-require_once ('mercadopago.php');
-
-$mp = new MP ("LL_ACCESS_TOKEN");
-```
-
-### Get your Access Token:
-
-```php
-$accessToken = $mp->get_access_token();
-
-print_r ($accessToken);
-```
-
-<a name="checkout"></a>
-## Using MercadoPago Checkout
-
-### Get an existent Checkout preference:
+#### Get an existent Checkout preference:
 
 ```php
 $preference = $mp->get_preference("PREFERENCE_ID");
@@ -51,7 +60,7 @@ $preference = $mp->get_preference("PREFERENCE_ID");
 print_r ($preference);
 ```
 
-### Create a Checkout preference:
+#### Create a Checkout preference:
 
 ```php
 $preference_data = array (
@@ -69,9 +78,8 @@ $preference = $mp->create_preference($preference_data);
 
 print_r ($preference);
 ```
-<a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
 
-### Update an existent Checkout preference:
+#### Update an existent Checkout preference:
 
 ```php
 $preference_data = array (
@@ -90,10 +98,9 @@ $preference = $mp->update_preference("PREFERENCE_ID", $preference_data);
 print_r ($preference);
 ```
 
-<a name="payments"></a>
-## Using MercadoPago Payment
+### Payments/Collections
 
-###Searching:
+#### Search for payments
 
 ```php
 $filters = array (
@@ -106,51 +113,82 @@ $searchResult = $mp->search_payment ($filters);
 
 print_r ($searchResult);
 ```
-<a href="http://developers.mercadopago.com/documentacion/busqueda-de-pagos-recibidos">More search examples</a>
-### Receiving IPN notification:
 
-* Go to **Mercadopago IPN configuration**:
-    * Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
-    * Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
-    * Mexico: [https://www.mercadopago.com/mlm/herramientas/notificaciones](https://www.mercadopago.com/mlm/herramientas/notificaciones)
-    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/notificaciones](https://www.mercadopago.com/mlv/herramientas/notificaciones)
-    * Colombia: [https://www.mercadopago.com/mco/herramientas/notificaciones](https://www.mercadopago.com/mco/herramientas/notificaciones)
+#### Get payment data
 
 ```php
 require_once ('mercadopago.php');
 
-header("Content-type: text/plain");
-
 $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
-$paymentInfo = $mp->get_payment_info ($_GET["id"]);
-
-header ("", true, $paymentInfo["status"]);
+$paymentInfo = $mp->get_payment ("PAYMENT_ID");
 
 print_r ($paymentInfo);
 ```
 
-### Cancel (only for pending payments):
+#### Cancel (only for pending payments):
 
 ```php
-$result = $mp->cancel_payment($_GET["ID"]);
+$result = $mp->cancel_payment("PAYMENT_ID");
 
-// Show result
 print_r ($result);
 ```
 
-### Refund (only for accredited payments):
+#### Refund (only for accredited payments):
 
 ```php
-$result = $mp->refund_payment($_GET["ID"]);
+$result = $mp->refund_payment("PAYMENT_ID");
 
-// Show result
 print_r ($result);
 ```
-<a href="http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion">About Cancel & Refund </a>
 
-### Generic resources methods
+<a name="custom-checkout"></a>
+## Customized checkout
 
-You can access any other resource from the MercadoPago API using the generic methods:
+### Configure your credentials
+
+* Get your **ACCESS_TOKEN** in the following address:
+    * Argentina: [https://www.mercadopago.com/mla/account/credentials](https://www.mercadopago.com/mla/account/credentials)
+    * Brazil: [https://www.mercadopago.com/mlb/account/credentials](https://www.mercadopago.com/mlb/account/credentials)
+    * Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
+    * Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
+    * Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
+
+```php
+require_once ('mercadopago.php');
+
+$mp = new MP ("ACCESS_TOKEN");
+```
+
+### Create payment
+
+```php
+$mp->post ("/v1/payments", payment_data);
+```
+
+### Create customer
+
+```php
+$mp->post ("/v1/customers", array("email" => "email@test.com"));
+```
+
+### Get customer
+
+```php
+$mp->get ("/v1/customers/CUSTOMER_ID");
+```
+
+* View more Custom checkout related APIs in Developers Site
+    * Argentina: [https://labs.mercadopago.com.ar/developers](https://labs.mercadopago.com.ar/developers)
+    * Brazil: [https://labs.mercadopago.com.br/developers](https://labs.mercadopago.com.br/developers)
+    * Mexico: [https://labs.mercadopago.com.mx/developers](https://labs.mercadopago.com.mx/developers)
+    * Venezuela: [https://labs.mercadopago.com.ve/developers](https://labs.mercadopago.com.ve/developers)
+    * Colombia: [https://labs.mercadopago.com.co/developers](https://labs.mercadopago.com.co/developers)
+
+
+<a name="generic-methods"></a>
+## Generic methods
+
+You can access any resource from the MercadoPago API (https://api.mercadopago.com) using the generic methods:
 
 ```php
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
@@ -164,12 +202,4 @@ $mp->put ("/resource/uri", data, [params]);
 
 // Delete a resource with optional URL params.
 $mp->delete ("/resource/uri", [params]);
-```
-
- For example, if you want to get the Sites list (no params and no authentication):
-
-```php
-$sites = $mp->get ("/sites", null, false);
-
-print_r ($sites);
 ```

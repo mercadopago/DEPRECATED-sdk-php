@@ -10,7 +10,7 @@
 
 class MP {
 
-    const version = "0.3.2";
+    const version = "0.3.3";
 
     private $client_id;
     private $client_secret;
@@ -405,7 +405,18 @@ class MPRestClient {
         );
 
         if ($response['status'] >= 400) {
-            throw new Exception ($response['response']['message'], $response['status']);
+            $message = $response['response']['message'];
+            if (isset ($response['response']['cause'])) {
+                if (isset ($response['response']['cause']['code']) && isset ($response['response']['cause']['description'])) {
+                    $message .= " - ".$response['response']['cause']['code'].': '.$response['response']['cause']['description'];
+                } else if (is_array ($response['response']['cause'])) {
+                    foreach ($response['response']['cause'] as $cause) {
+                        $message .= " - ".$cause['code'].': '.$cause['description'];
+                    }
+                }
+            }
+
+            throw new Exception ($message, $response['status']);
         }
 
         curl_close($connect);

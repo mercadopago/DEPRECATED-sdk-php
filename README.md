@@ -214,7 +214,7 @@ where `request` can be:
 ```php
 array(
     "uri" => "The resource URI, relative to https://api.mercadopago.com",
-    "params" => array("Optional. Key=>Value array with parameters to be appended to the URL"),
+    "params" => "Optional. Key=>Value array with parameters to be appended to the URL",
     "data" => "Optional. Object or String to be sent in POST and PUT requests",
     "headers" => "Optional. Key => Value array with custom headers, like content-type: application/x-www-form-urlencoded",
     "authenticate" => "Optional. Boolean to specify if the GET method has to authenticate with credentials before request. Set it to false when accessing public APIs"

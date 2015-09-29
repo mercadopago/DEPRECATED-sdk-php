@@ -207,7 +207,7 @@ $mp->get (
 You can access any resource from the MercadoPago API (https://api.mercadopago.com) using the generic methods.
 The basic structure is:
 
-```$mp->[method]($request)```
+`$mp->[method]($request)`
 
 where `request` can be:
 

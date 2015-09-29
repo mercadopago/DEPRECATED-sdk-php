@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "1.0.0";
+    const version = "0.5.0";
 
     private $client_id;
     private $client_secret;
@@ -318,13 +318,14 @@ class MP {
         if (is_string ($request)) {
             $request = array(
                 "uri" => $request,
-                "params" => $params
+                "params" => $params,
+                "authenticate" => $authenticate
             );
         }
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        if ($authenticate !== false) {
+        if ($request["authenticate"] !== false) {
             $request["params"]["access_token"] = $this->get_access_token();
         }
 
@@ -349,7 +350,9 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        $request["params"]["access_token"] = $this->get_access_token();
+        if ($request["authenticate"] !== false) {
+            $request["params"]["access_token"] = $this->get_access_token();
+        }
 
         $result = MPRestClient::post($request);
         return $result;
@@ -361,7 +364,7 @@ class MP {
     * @param data (deprecated)
     * @param params (deprecated)
     */
-    public function put($request, $data, $params = null) {
+    public function put($request, $data = null, $params = null) {
         if (is_string ($request)) {
             $request = array(
                 "uri" => $request,
@@ -372,9 +375,11 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        $request["params"]["access_token"] = $this->get_access_token();
+        if ($request["authenticate"] !== false) {
+            $request["params"]["access_token"] = $this->get_access_token();
+        }
 
-        $result = MPRestClient::put($uri, $data);
+        $result = MPRestClient::put($request);
         return $result;
     }
 
@@ -394,9 +399,11 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        $request["params"]["access_token"] = $this->get_access_token();
+        if ($request["authenticate"] !== false) {
+            $request["params"]["access_token"] = $this->get_access_token();
+        }
 
-        $result = MPRestClient::delete($uri);
+        $result = MPRestClient::delete($request);
         return $result;
     }
 

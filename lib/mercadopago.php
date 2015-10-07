@@ -325,7 +325,7 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        if ($request["authenticate"] !== false) {
+        if (!isset ($request["authenticate"]) || $request["authenticate"] !== false) {
             $request["params"]["access_token"] = $this->get_access_token();
         }
 
@@ -350,7 +350,7 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        if ($request["authenticate"] !== false) {
+        if (!isset ($request["authenticate"]) || $request["authenticate"] !== false) {
             $request["params"]["access_token"] = $this->get_access_token();
         }
 
@@ -375,7 +375,7 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        if ($request["authenticate"] !== false) {
+        if (!isset ($request["authenticate"]) || $request["authenticate"] !== false) {
             $request["params"]["access_token"] = $this->get_access_token();
         }
 
@@ -399,7 +399,7 @@ class MP {
 
         $request["params"] = is_array ($request["params"]) ? $request["params"] : array();
 
-        if ($request["authenticate"] !== false) {
+        if (!isset ($request["authenticate"]) || $request["authenticate"] !== false) {
             $request["params"]["access_token"] = $this->get_access_token();
         }
 

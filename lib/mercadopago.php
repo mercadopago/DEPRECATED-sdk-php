@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.5.1";
+    const version = "0.5.2";
 
     private $client_id;
     private $client_secret;
@@ -23,7 +23,7 @@ class MP {
         $i = func_num_args(); 
 
         if ($i > 2 || $i < 1) {
-            throw new Exception("Invalid arguments. Use CLIENT_ID and CLIENT SECRET, or ACCESS_TOKEN");
+            throw new MercadoPagoException("Invalid arguments. Use CLIENT_ID and CLIENT SECRET, or ACCESS_TOKEN");
         }
 
         if ($i == 1) {
@@ -67,7 +67,7 @@ class MP {
         ));
 
         if ($access_data["status"] != 200) {
-            throw new Exception ($access_data['response']['message'], $access_data['status']);
+            throw new MercadoPagoException ($access_data['response']['message'], $access_data['status']);
         }
 
         $this->access_data = $access_data['response'];
@@ -419,15 +419,15 @@ class MPRestClient {
 
     private static function build_request($request) {
         if (!extension_loaded ("curl")) {
-            throw new Exception("cURL extension not found. You need to enable cURL in your php.ini or another configuration you have.");
+            throw new MercadoPagoException("cURL extension not found. You need to enable cURL in your php.ini or another configuration you have.");
         }
 
         if (!isset($request["method"])) {
-            throw new Exception("No HTTP METHOD specified");
+            throw new MercadoPagoException("No HTTP METHOD specified");
         }
 
         if (!isset($request["uri"])) {
-            throw new Exception("No URI specified");
+            throw new MercadoPagoException("No URI specified");
         }
 
         // Set headers
@@ -483,7 +483,7 @@ class MPRestClient {
                 if(function_exists('json_last_error')) {
                     $json_error = json_last_error();
                     if ($json_error != JSON_ERROR_NONE) {
-                        throw new Exception("JSON Error [{$json_error}] - Data: ".$request["data"]);
+                        throw new MercadoPagoException("JSON Error [{$json_error}] - Data: ".$request["data"]);
                     }
                 }
             } else if ($form_content) {
@@ -505,7 +505,7 @@ class MPRestClient {
         $api_http_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
 
         if ($api_result === FALSE) {
-            throw new Exception (curl_error ($connect));
+            throw new MercadoPagoException (curl_error ($connect));
         }
 
         $response = array(
@@ -525,7 +525,7 @@ class MPRestClient {
                 }
             }
 
-            throw new Exception ($message, $response['status']);
+            throw new MercadoPagoException ($message, $response['status']);
         }
 
         curl_close($connect);
@@ -567,5 +567,12 @@ class MPRestClient {
         $request["method"] = "DELETE";
 
         return self::exec($request);
+    }
+}
+
+class MercadoPagoException extends Exception {
+    public function __construct($message, $code = 500, Exception $previous = null) {
+        // Default code 500
+        parent::__construct($message, $code, $previous);
     }
 }

@@ -22,7 +22,16 @@ class UnitTest extends PHPUnit_Framework_TestCase {
         $this->mp = new MP($this->credentials["client_id"],$this->credentials["client_secret"]);
     }
 
-    /* Call preference added through button flow */
+    /* Test basic Exception */
+
+    /**
+     * @expectedException MercadoPagoException
+     */
+    public function testInstantiationException() {
+        $mp = new MP("param 1", "param 2", "param 3");
+    }
+
+    /* Test LL Access Token */
 
     public function testLongLiveAccessToken() {
         $mp = new MP($this->credentials["access_token"]);

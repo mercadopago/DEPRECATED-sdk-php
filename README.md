@@ -14,7 +14,7 @@
 From command line
 
 ```
-composer require mercadopago/sdk:0.5.0
+composer require mercadopago/sdk:0.5.1
 ```
 
 As a dependency in your project's composer.json

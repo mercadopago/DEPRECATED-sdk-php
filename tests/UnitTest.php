@@ -112,8 +112,8 @@ class UnitTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($preference["status"] == 201);
         $this->assertTrue($preference["response"]["payer_email"] == "my_customer@my_site.com"
-                && (int) $preference["response"]["reason"] == "Preapproval preference"
-                && (double) $preference["response"]["external_reference"] == "OP-1234");
+                && $preference["response"]["reason"] == "Preapproval preference"
+                && $preference["response"]["external_reference"] == "OP-1234");
 
         // GET
         $preference = $this->mp->get_preapproval_payment($preference["response"]["id"]);
@@ -133,8 +133,8 @@ class UnitTest extends PHPUnit_Framework_TestCase {
         $preferenceUpdatedResult = $this->mp->get_preapproval_payment($preference["response"]["id"]);
 
         $this->assertTrue($preferenceUpdatedResult["response"]["payer_email"] == "my_customer@my_site.com"
-                && (int) $preference["response"]["reason"] == "Preapproval preference updated"
-                && (double) $preference["response"]["external_reference"] == "OP-5678");
+                && $preference["response"]["reason"] == "Preapproval preference updated"
+                && $preference["response"]["external_reference"] == "OP-5678");
     }
 
 

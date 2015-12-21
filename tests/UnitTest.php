@@ -133,8 +133,8 @@ class UnitTest extends PHPUnit_Framework_TestCase {
         $preferenceUpdatedResult = $this->mp->get_preapproval_payment($preference["response"]["id"]);
 
         $this->assertTrue($preferenceUpdatedResult["response"]["payer_email"] == "my_customer@my_site.com"
-                && $preference["response"]["reason"] == "Preapproval preference updated"
-                && $preference["response"]["external_reference"] == "OP-5678");
+                && $preferenceUpdatedResult["response"]["reason"] == "Preapproval preference updated"
+                && $preferenceUpdatedResult["response"]["external_reference"] == "OP-5678");
     }
 
 

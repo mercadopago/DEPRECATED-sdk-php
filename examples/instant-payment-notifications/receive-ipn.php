@@ -6,7 +6,7 @@
  * @author fvaccaro
  */
 // Include Mercadopago library
-require_once "../../lib/mercadopago.php";
+require_once "../../vendor/autoload.php";
 
 // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET): 
 // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 

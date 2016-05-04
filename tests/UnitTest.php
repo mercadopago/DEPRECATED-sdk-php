@@ -1,16 +1,13 @@
 <?php
 
-// You need configure absolute_path here
-require_once(dirname(__FILE__).'/../lib/mercadopago.php');
-
 class UnitTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        
+
     }
 
     public function tearDown() {
-        
+
     }
 
     var $mp;

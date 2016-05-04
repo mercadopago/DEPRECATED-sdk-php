@@ -1,5 +1,5 @@
 <?php
-require_once "../../lib/mercadopago.php";
+require_once "../../vendor/autoload.php";
 
 $mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 

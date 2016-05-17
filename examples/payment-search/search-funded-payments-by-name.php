@@ -14,11 +14,13 @@
         // Include Mercadopago library
         require_once "../../lib/mercadopago.php";
 
-        // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET): 
-        // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
+        // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET):
+        // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones
         // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes
-        // Mexico: https://www.mercadopago.com/mlm/herramientas/aplicaciones 
-        // Venezuela: https://www.mercadopago.com/mlv/herramientas/aplicaciones 
+        // Mexico: https://www.mercadopago.com/mlm/herramientas/aplicaciones
+        // Venezuela: https://www.mercadopago.com/mlv/herramientas/aplicaciones
+        // Colombia: https://www.mercadopago.com/mco/herramientas/aplicaciones
+        // Chile: https://www.mercadopago.com/mlc/herramientas/aplicaciones
         $mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 
         // Sets the filters you want

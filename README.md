@@ -14,7 +14,7 @@
 From command line
 
 ```
-composer require mercadopago/sdk:0.3.4
+composer require mercadopago/sdk:0.5.2
 ```
 
 As a dependency in your project's composer.json
@@ -22,7 +22,7 @@ As a dependency in your project's composer.json
 ```json
 {
     "require": {
-        "mercadopago/sdk": "0.3.4"
+        "mercadopago/sdk": "0.5.2"
     }
 }
 ```
@@ -163,19 +163,35 @@ $mp = new MP ("ACCESS_TOKEN");
 ### Create payment
 
 ```php
-$mp->post ("/v1/payments", payment_data);
+$mp->post (
+    array(
+        "uri" => "/v1/payments",
+        "data" => [payment_data]
+    )
+);
 ```
 
 ### Create customer
 
 ```php
-$mp->post ("/v1/customers", array("email" => "email@test.com"));
+$mp->post (
+    array(
+        "uri" => "/v1/customers",
+        "data" => array(
+            "email" => "email@test.com"
+        )
+    )
+);
 ```
 
 ### Get customer
 
 ```php
-$mp->get ("/v1/customers/CUSTOMER_ID");
+$mp->get (
+    array(
+        "uri" => "/v1/customers/CUSTOMER_ID"
+    )
+);
 ```
 
 * View more Custom checkout related APIs in Developers Site
@@ -188,18 +204,78 @@ $mp->get ("/v1/customers/CUSTOMER_ID");
 <a name="generic-methods"></a>
 ## Generic methods
 
-You can access any resource from the MercadoPago API (https://api.mercadopago.com) using the generic methods:
+You can access any resource from the [MercadoPago API](https://api.mercadopago.com) using the generic methods.
+The basic structure is:
+
+`$mp->[method]($request)`
+
+where `request` can be:
+
+```php
+array(
+    "uri" => "The resource URI, relative to https://api.mercadopago.com",
+    "params" => "Optional. Key=>Value array with parameters to be appended to the URL",
+    "data" => "Optional. Object or String to be sent in POST and PUT requests",
+    "headers" => "Optional. Key => Value array with custom headers, like content-type: application/x-www-form-urlencoded",
+    "authenticate" => "Optional. Boolean to specify if the GET method has to authenticate with credentials before request. Set it to false when accessing public APIs"
+)
+```
+
+Examples:
 
 ```php
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
-$mp->get ("/resource/uri", [params], [authenticate=true]);
+$mp->get (
+    array(
+        "uri" => "/resource/uri",
+        "params" => array(
+            "param" => "value"
+        ),
+        "headers" => array(
+            "header" => "value"
+        ),
+        "authenticate" => true
+    )
+);
 
 // Create a resource with "data" and optional URL params.
-$mp->post ("/resource/uri", data, [params]);
+$mp->post (
+    array(
+        "uri" => "/resource/uri",
+        "params" => array(
+            "param" => "value"
+        ),
+        "headers" => array(
+            "header" => "value"
+        ),
+        "data" => [data]
+    )
+);
 
 // Update a resource with "data" and optional URL params.
-$mp->put ("/resource/uri", data, [params]);
+$mp->put (
+    array(
+        "uri" => "/resource/uri",
+        "params" => array(
+            "param" => "value"
+        ),
+        "headers" => array(
+            "header" => "value"
+        ),
+        "data" => [data]
+    )
+);
 
 // Delete a resource with optional URL params.
-$mp->delete ("/resource/uri", [params]);
+$mp->delete (
+    array(
+        "uri" => "/resource/uri",
+        "params" => array(
+            "param" => "value"
+        ),
+        "headers" => array(
+            "header" => "value"
+        )
+    )
+);
 ```

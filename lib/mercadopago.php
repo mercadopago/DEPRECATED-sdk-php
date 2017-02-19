@@ -1,5 +1,7 @@
 <?php
 
+namespace \MercadoLivre/
+
 /**
  * MercadoPago Integration Library
  * Access MercadoPago for payments integration

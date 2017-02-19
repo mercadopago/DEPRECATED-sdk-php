@@ -1,6 +1,6 @@
 <?php
 
-namespace \MercadoLivre/
+namespace \MercadoLivre;
 
 /**
  * MercadoPago Integration Library

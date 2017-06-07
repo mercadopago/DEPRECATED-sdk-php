@@ -519,9 +519,15 @@ class MPRestClient {
                 if (isset ($response['response']['cause']['code']) && isset ($response['response']['cause']['description'])) {
                     $message .= " - ".$response['response']['cause']['code'].': '.$response['response']['cause']['description'];
                 } else if (is_array ($response['response']['cause'])) {
-                    foreach ($response['response']['cause'] as $cause) {
-                        $message .= " - ".$cause['code'].': '.$cause['description'];
-                    }
+                    foreach ($response['cause'] as $causes) {
+                          if(is_array($causes)) {
+                            foreach ($causes as $cause) {
+                              $message .= " - ".$cause['code'].': '.$cause['description'];
+                            }
+                          } else {
+                            $message .= " - ".$causes['code'].': '.$causes['description'];
+                          }
+                      }
                 }
             }
 

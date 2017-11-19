@@ -1,6 +1,7 @@
 <?php
-require_once "../../../lib/mercadopago.php";
- 
+require_once "../../../lib/MP.php";
+use MercadoPago\Sdk\MP;
+
 $mp = new MP('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET');
 
 $preference_data = array(

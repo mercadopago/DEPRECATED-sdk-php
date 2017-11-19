@@ -12,8 +12,11 @@
 		"ext-curl": "*"
 	},
 	"autoload": {
-		"classmap": [
-			"lib/mercadopago.php"
-		]
+		"psr-4": {
+			"MercadoPago\\Sdk\\": "lib/"
+		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^5.7"
 	}
 }

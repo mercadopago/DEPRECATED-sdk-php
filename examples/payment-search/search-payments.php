@@ -12,8 +12,8 @@
          * @author hcasatti
          */
         // Include Mercadopago library
-        require_once "../../lib/mercadopago.php";
-
+        require_once "../../lib/MP.php";
+        use MercadoPago\Sdk\MP;
         // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET):
         // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones
         // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes

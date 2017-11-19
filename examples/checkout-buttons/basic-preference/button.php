@@ -1,5 +1,6 @@
 <?php
-require_once "../../../lib/mercadopago.php";
+
+use MercadoPago\Sdk\MP;
 
 $mp = new MP("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 

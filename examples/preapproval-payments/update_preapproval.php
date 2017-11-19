@@ -1,6 +1,6 @@
 <?php
-require_once "../../lib/mercadopago.php";
-
+require_once "../../lib/MP.php";
+use MercadoPago\Sdk\MP;
 $mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 
 $id = "PREAPPROVAL_ID";

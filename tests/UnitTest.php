@@ -1,7 +1,8 @@
 <?php
 
-// You need configure absolute_path here
-require_once(dirname(__FILE__).'/../lib/mercadopago.php');
+use \MercadoPago\Sdk\MP;
+use \MercadoPago\Sdk\Exceptions\MercadoPagoException;
+
 
 class UnitTest extends PHPUnit_Framework_TestCase {
 
@@ -25,7 +26,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
     /* Test basic Exception */
 
     /**
-     * @expectedException MercadoPagoException
+     * @expectedException \MercadoPago\Sdk\Exceptions\MercadoPagoException
      */
     public function testInstantiationException() {
         $mp = new MP("param 1", "param 2", "param 3");

@@ -25,7 +25,6 @@
 
         // Sets the filters you want
         $filters = array(
-            "site_id" => "MLA", // Argentina: MLA; Brasil: MLB
             "external_reference" => "Bill001"
         );
 
@@ -40,9 +39,9 @@
             foreach ($searchResult["response"]["results"] as $payment) {
                 ?>
                 <tr>
-                    <td><?php echo $payment["collection"]["id"]; ?></td>
-                    <td><?php echo $payment["collection"]["external_reference"]; ?></td>
-                    <td><?php echo $payment["collection"]["status"]; ?></td>
+                    <td><?php echo $payment["id"]; ?></td>
+                    <td><?php echo $payment["external_reference"]; ?></td>
+                    <td><?php echo $payment["status"]; ?></td>
                 </tr>
                 <?php
             }

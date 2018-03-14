@@ -26,7 +26,7 @@
         // Sets the filters you want
         $filters = array(
             "installments" => 12,
-            "reason" => "product_name",
+            "description" => "product_name",
             "operation_type" => "regular_payment"
         );
 
@@ -41,9 +41,9 @@
             foreach ($searchResult["response"]["results"] as $payment) {
                 ?>
                 <tr>
-                    <td><?php echo $payment["collection"]["id"]; ?></td>
-                    <td><?php echo $payment["collection"]["external_reference"]; ?></td>
-                    <td><?php echo $payment["collection"]["status"]; ?></td>
+                    <td><?php echo $payment["id"]; ?></td>
+                    <td><?php echo $payment["external_reference"]; ?></td>
+                    <td><?php echo $payment["status"]; ?></td>
                 </tr>
                 <?php
             }

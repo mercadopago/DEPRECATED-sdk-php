@@ -27,8 +27,8 @@ if (!isset($_GET["id"], $_GET["topic"]) || !ctype_digit($_GET["id"])) {
 
 // Get the payment reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com
 if($_GET["topic"] == 'payment'){
-	$payment_info = $mp->get("/collections/notifications/" . $_GET["id"], $params, false);
-	$merchant_order_info = $mp->get("/merchant_orders/" . $payment_info["response"]["collection"]["merchant_order_id"], $params, false);
+	$payment_info = $mp->get("/v1/payments/" . $_GET["id"], $params, false);
+	$merchant_order_info = $mp->get("/merchant_orders/" . $payment_info["response"]["order"]["id"], $params, false);
 // Get the merchant_order reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com	
 }else if($_GET["topic"] == 'merchant_order'){
 	$merchant_order_info = $mp->get("/merchant_orders/" . $_GET["id"], $params, false);

@@ -28,7 +28,7 @@
             "range" => "date_created",
             "begin_date" => "2011-10-21T00:00:00Z",
             "end_date" => "2011-10-25T24:00:00Z",
-            "payment_type" => "credit_card",
+            "payment_type_id" => "credit_card",
             "operation_type" => "regular_payment"
         );
 
@@ -43,9 +43,9 @@
             foreach ($searchResult["response"]["results"] as $payment) {
                 ?>
                 <tr>
-                    <td><?php echo $payment["collection"]["id"]; ?></td>
-                    <td><?php echo $payment["collection"]["external_reference"]; ?></td>
-                    <td><?php echo $payment["collection"]["status"]; ?></td>
+                    <td><?php echo $payment["id"]; ?></td>
+                    <td><?php echo $payment["external_reference"]; ?></td>
+                    <td><?php echo $payment["status"]; ?></td>
                 </tr>
                 <?php
             }

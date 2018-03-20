@@ -11,7 +11,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 
 class MP {
 
-    const version = "0.5.2";
+    const version = "0.5.3";
 
     private $client_id;
     private $client_secret;
@@ -84,7 +84,7 @@ class MP {
         $uri_prefix = $this->sandbox ? "/sandbox" : "";
 
         $request = array(
-            "uri" => $uri_prefix."/collections/notifications/{$id}",
+            "uri" => "/v1/payments/{$id}",
             "params" => array(
                 "access_token" => $this->get_access_token()
             )
@@ -121,16 +121,15 @@ class MP {
      */
     public function refund_payment($id) {
         $request = array(
-            "uri" => "/collections/{$id}",
+            "uri" => "/v1/payments/{$id}/refunds",
             "params" => array(
                 "access_token" => $this->get_access_token()
             ),
             "data" => array(
-                "status" => "refunded"
             )
         );
 
-        $response = MPRestClient::put($request);
+        $response = MPRestClient::post($request);
         return $response;
     }
 
@@ -141,7 +140,7 @@ class MP {
      */
     public function cancel_payment($id) {
         $request = array(
-            "uri" => "/collections/{$id}",
+            "uri" => "/v1/payments/{$id}",
             "params" => array(
                 "access_token" => $this->get_access_token()
             ),
@@ -188,7 +187,7 @@ class MP {
         $uri_prefix = $this->sandbox ? "/sandbox" : "";
 
         $request = array(
-            "uri" => $uri_prefix."/collections/search",
+            "uri" => "/v1/payments/search",
             "params" => array_merge ($filters, array(
                 "access_token" => $this->get_access_token()
             ))

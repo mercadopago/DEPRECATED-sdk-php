@@ -1,4 +1,4 @@
-# MercadoPago SDK module for Payments integration
+# MercadoPago SDK 
 
 * [Install](#install)
 * [Basic checkout](#basic-checkout)

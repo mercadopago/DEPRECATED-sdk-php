@@ -1,3 +1,5 @@
+**Warning:** We recommend try to use our new SDK [dx-php](https://github.com/mercadopago/dx-php)
+
 # MercadoPago SDK 
 
 * [Install](#install)

@@ -124,8 +124,6 @@ class MP {
             "uri" => "/v1/payments/{$id}/refunds",
             "params" => array(
                 "access_token" => $this->get_access_token()
-            ),
-            "data" => array(
             )
         );
 

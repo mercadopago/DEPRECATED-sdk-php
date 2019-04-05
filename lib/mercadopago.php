@@ -17,7 +17,7 @@ class MP {
     private $client_secret;
     private $ll_access_token;
     private $access_data;
-    private $sandbox = FALSE;
+    private $sandbox = false;
 
     function __construct() {
         $i = func_num_args();
@@ -36,9 +36,9 @@ class MP {
         }
     }
 
-    public function sandbox_mode($enable = NULL) {
+    public function sandbox_mode($enable = null) {
         if (!is_null($enable)) {
-            $this->sandbox = $enable === TRUE;
+            $this->sandbox = $enable === true;
         }
 
         return $this->sandbox;
@@ -503,7 +503,7 @@ class MPRestClient {
         $api_result = curl_exec($connect);
         $api_http_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
 
-        if ($api_result === FALSE) {
+        if ($api_result === false) {
             throw new MercadoPagoException (curl_error ($connect));
         }
 

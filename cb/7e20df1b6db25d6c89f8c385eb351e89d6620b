@@ -1,0 +1,19 @@
+MIGRATION_GUIDE.md
+  s_039fbaaf35f5c5::t_e67e5b25c67ed0 1-338
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "cb7e20df1b6db25d6c89f8c385eb351e89d6620b",
+  "prompts": {},
+  "sessions": {
+    "s_039fbaaf35f5c5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "93ec4e7c-2d82-4c72-8521-21b436c035df",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
